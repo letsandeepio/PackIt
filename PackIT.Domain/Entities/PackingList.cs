@@ -1,6 +1,7 @@
-﻿using PackIT.Domain.Exceptions;
+﻿using PackIT.Domain.Events;
+using PackIT.Domain.Exceptions;
 using PackIT.Domain.ValueObjects;
-using PackIT.Shared.Abstractions;
+using PackIT.Shared.Abstractions.Domain;
 
 namespace PackIT.Domain.Entities;
 
@@ -29,7 +30,18 @@ public class PackingList : AggregateRoot<PackingListId>
     }
 
     _items.AddLast(item);
+
+    AddEvent(new PackingItemAdded(this, item));
   }
+
+  public void AddItems(IEnumerable<PackingItem> items)
+  {
+    foreach (var item in items)
+    {
+      AddItem(item);
+    }
+  }
+
 
 
 }
