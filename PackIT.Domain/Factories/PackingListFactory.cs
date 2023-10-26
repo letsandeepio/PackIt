@@ -12,7 +12,7 @@ public class PackingListFactory : IPackingListFactory
     throw new NotImplementedException();
   }
 
-  public PackingList CreateWithDefaultItems(PackingListId id, PackingListName name, TravelDays days, Gender gender, Localization localization)
+  public PackingList CreateWithDefaultItems(PackingListId id, PackingListName name, TravelDays days, Gender gender, Temperature temperature, Localization localization)
   {
     throw new NotImplementedException();
   }
