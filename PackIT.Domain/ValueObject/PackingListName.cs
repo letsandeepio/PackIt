@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using PackIT.Domain.Exceptions;
 
 namespace PackIT.Domain.ValueObjects;
 
