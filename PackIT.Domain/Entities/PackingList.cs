@@ -1,12 +1,16 @@
-﻿namespace PackIT.Domain.Entities;
+﻿using PackIT.Domain.ValueObjects;
+
+namespace PackIT.Domain.Entities;
 
 public class PackingList
 {
   public Guid Id { get; private set; }
   private string _name;
-  public string _localization;
+  private Localization _localization;
 
-  internal PackingList(Guid id, string name, string localization)
+  private readonly LinkedList<PackingItem> _items = new();
+
+  internal PackingList(Guid id, string name, Localization localization)
   {
     Id = id;
     _name = name;

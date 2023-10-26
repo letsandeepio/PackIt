@@ -1,6 +1,6 @@
 ﻿using PackIT.Shared.Abstractions.Exceptions;
 
-namespace PackIT.Domain;
+namespace PackIT.Domain.Exceptions;
 
 public class EmptyPackingListNameException : PackItException
 {
