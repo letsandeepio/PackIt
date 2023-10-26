@@ -64,7 +64,13 @@ public class PackingList : AggregateRoot<PackingListId>
     }
 
     return item;
+  }
 
+  private void RemoveItem(string itemName)
+  {
+    var item = GetItem(itemName);
+    _items.Remove(item);
+    AddEvent(new PackingItemRemoved(this, item));
   }
 
 }
