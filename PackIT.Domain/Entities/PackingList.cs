@@ -42,6 +42,29 @@ public class PackingList : AggregateRoot<PackingListId>
     }
   }
 
+  public void PackItem(string itemName)
+  {
+    var item = GetItem(itemName);
 
+    var packedItem = item with { IsPacked = true };
+
+    _items.Find(item).Value = packedItem;
+
+    AddEvent(new PackingItemPacked(this, item));
+
+  }
+
+  private PackingItem GetItem(string itemName)
+  {
+    var item = _items.SingleOrDefault(i => i.Name == itemName);
+
+    if (item is null)
+    {
+      throw new PackingItemNotFoundException(itemName);
+    }
+
+    return item;
+
+  }
 
 }
