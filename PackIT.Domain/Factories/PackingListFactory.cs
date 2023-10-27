@@ -1,19 +1,33 @@
 ﻿using PackIT.Domain.Consts;
 using PackIT.Domain.Entities;
 using PackIT.Domain.Factories;
+using PackIT.Domain.Policies;
 using PackIT.Domain.ValueObjects;
 
 namespace PackIT.Domain;
 
 public class PackingListFactory : IPackingListFactory
 {
-  public PackingList Create(PackingListId id, PackingListName name, Localization localization)
+  private readonly IEnumerable<IPackingItemsPolicy> _policies;
+
+  public PackingListFactory(IEnumerable<IPackingItemsPolicy> policies)
   {
-    throw new NotImplementedException();
+    _policies = policies;
   }
 
+
+  public PackingList Create(PackingListId id, PackingListName name, Localization localization) => new(id, name, localization);
   public PackingList CreateWithDefaultItems(PackingListId id, PackingListName name, TravelDays days, Gender gender, Temperature temperature, Localization localization)
   {
-    throw new NotImplementedException();
+    var data = new PolicyData(days, gender, temperature, localization);
+
+    var applicablePolicies = _policies.Where(p => p.isApplicable(data));
+    var items = applicablePolicies.SelectMany(p => p.GenerateItems(data));
+
+    var packingList = Create(id, name, localization);
+
+    packingList.AddItems(items);
+
+    return packingList;
   }
 }
