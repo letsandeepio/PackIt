@@ -1,6 +1,6 @@
 ﻿using PackIT.Domain.Policies;
 
-namespace PackIT.Domain;
+namespace PackIT.Domain.Policies.Gender;
 
 internal class FemaleGenderPolicy : IPackingItemsPolicy
 {
