@@ -5,6 +5,7 @@ namespace PackIT.Domain.Repositories;
 
 public interface IPackingListRepository
 {
+  Task<bool> ExistsAsync(PackingListName name);
   Task<PackingList> GetAsync(PackingListId id);
   Task AddAsync(PackingList packingList);
   Task UpdateAsync(PackingList packingList);
