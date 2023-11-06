@@ -15,6 +15,8 @@ public static class Extensions
 
     services.AddSingleton<ICommandDispatcher, InMemoryCommandDispatcher>();
 
+    /* Automatically register the Commands */
+
     services.Scan(s => s.FromAssemblies(assembly).AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>))).AsImplementedInterfaces().WithScopedLifetime());
 
     return services;
