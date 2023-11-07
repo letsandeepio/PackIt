@@ -32,6 +32,11 @@ internal sealed class WriteConfiguration : IEntityTypeConfiguration<PackingList>
 
   public void Configure(EntityTypeBuilder<PackingItem> builder)
   {
-    throw new NotImplementedException();
+    builder.Property<Guid>("Id");
+    builder.Property(pi => pi.Name);
+    builder.Property(pi => pi.Quantity);
+    builder.Property(pi => pi.IsPacked);
+
+    builder.ToTable("PackingItems");
   }
 }
