@@ -1,19 +1,19 @@
-﻿using PackIT.Application.Exceptions;
-using PackIT.Domain;
+﻿using PackIT.Application.Commands;
+using PackIT.Application.Exceptions;
 using PackIT.Domain.Repositories;
 using PackIT.Shared.Abstractions.Commands;
 
 namespace PackIT.Application.Commands.Handlers;
 
-internal sealed class AddPackingItemHandler : ICommandHandler<AddPackingItem>
+internal sealed class RemovePackingItemHandler : ICommandHandler<RemovePackingItem>
 {
   private readonly IPackingListRepository _repository;
 
-  public AddPackingItemHandler(IPackingListRepository repository)
+  public RemovePackingItemHandler(IPackingListRepository repository)
   {
     _repository = repository;
   }
-  public async Task HandleAsync(AddPackingItem command)
+  public async Task HandleAsync(RemovePackingItem command)
   {
     var packingList = await _repository.GetAsync(command.PackingListId);
 
@@ -22,9 +22,7 @@ internal sealed class AddPackingItemHandler : ICommandHandler<AddPackingItem>
       throw new PackingListNotFoundException(command.PackingListId);
     }
 
-    var packingItem = new PackingItem(command.Name, command.Quantity);
-
-    packingList.AddItem(packingItem);
+    packingList.RemoveItem(command.Name);
 
     await _repository.UpdateAsync(packingList);
 

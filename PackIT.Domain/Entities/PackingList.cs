@@ -8,8 +8,8 @@ namespace PackIT.Domain.Entities;
 public class PackingList : AggregateRoot<PackingListId>
 {
   public PackingListId Id { get; private set; }
-  private string _name;
-  private Localization _localization;
+  private readonly string _name;
+  private readonly Localization _localization;
   private readonly LinkedList<PackingItem> _items = new();
 
   private PackingList(PackingListId id, string name, Localization localization, LinkedList<PackingItem> items) : this(id, name, localization)
@@ -70,7 +70,7 @@ public class PackingList : AggregateRoot<PackingListId>
     return item;
   }
 
-  private void RemoveItem(string itemName)
+  public void RemoveItem(string itemName)
   {
     var item = GetItem(itemName);
     _items.Remove(item);

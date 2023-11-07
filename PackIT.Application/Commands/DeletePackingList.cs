@@ -2,7 +2,7 @@
 
 namespace PackIT.Application.Commands;
 
-public record class DeletePackingList(Guid Id) : ICommand;
+public record class RemovePackingList(Guid Id) : ICommand;
 
 
 
