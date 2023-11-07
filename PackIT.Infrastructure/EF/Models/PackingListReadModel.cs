@@ -1,7 +1,4 @@
-﻿using PackIT.Application.DTO;
-using PackIT.Domain.ValueObjects;
-
-namespace PackIT.Infrastructure.EF.Models;
+﻿namespace PackIT.Infrastructure.EF.Models;
 
 public class PackingListReadModel
 {

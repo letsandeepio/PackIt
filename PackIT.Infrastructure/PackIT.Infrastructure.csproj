@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EF/" />
     <Folder Include="EF/Models/" />
   </ItemGroup>
 
