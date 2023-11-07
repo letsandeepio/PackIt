@@ -4,7 +4,7 @@ using PackIT.Domain.Repositories;
 using PackIT.Domain.ValueObjects;
 using PackIT.Shared.Abstractions.Commands;
 
-namespace PackIT.Application.Handlers;
+namespace PackIT.Application.Commands.Handlers;
 
 public class CreatePackingListWithItemsHandler : ICommandHandler<CreatePackingListWithItems>
 {
