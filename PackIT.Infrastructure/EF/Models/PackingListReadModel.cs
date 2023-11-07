@@ -1,6 +1,6 @@
 ﻿namespace PackIT.Infrastructure.EF.Models;
 
-public class PackingListReadModel
+internal class PackingListReadModel
 {
   public Guid Id { get; set; }
   public int Version { get; set; }

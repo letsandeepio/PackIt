@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PackIT.Infrastructure.EF.Models;
+using PackIT.Domain.Entities;
 
 namespace PackIT.Infrastructure.EF.Contexts;
 
-internal sealed class ReadDbContext : DbContext
+internal sealed class WriteDbContext : DbContext
 {
-  public DbSet<PackingListReadModel> PackingLists { get; set; }
+  public DbSet<PackingList> PackingLists { get; set; }
 
-  public ReadDbContext(DbContextOptions<ReadDbContext> options) : base(options)
+  public WriteDbContext(DbContextOptions<WriteDbContext> options) : base(options)
   {
   }
 
