@@ -34,10 +34,14 @@ public class CreatePackingListWithItemsHandler : ICommandHandler<CreatePackingLi
 
     if (weather is null)
     {
-
+      throw new MissingLocalizationWeatherException(localization);
     }
 
+    TravelDays daysValue = new TravelDays(days);
 
+    var packingList = _factory.CreateWithDefaultItems(id, name, daysValue, gender, weather.Temperature, localization);
+
+    await _repository.AddAsync(packingList);
 
 
   }
