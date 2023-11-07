@@ -52,7 +52,9 @@ public class PackingList : AggregateRoot<PackingListId>
 
     var packedItem = item with { IsPacked = true };
 
-    _items.Find(item).Value = packedItem;
+    var currentItem = _items.Find(item) ?? throw new Exception("Item not found");
+
+    currentItem.Value = packedItem;
 
     AddEvent(new PackingItemPacked(this, item));
 
