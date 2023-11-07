@@ -14,6 +14,11 @@ internal sealed class ReadDbContext : DbContext
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     modelBuilder.HasDefaultSchema("packing");
+
+    var configuration = new ReadConfiguration();
+    modelBuilder.ApplyConfiguration<PackingListReadModel>(configuration);
+    modelBuilder.ApplyConfiguration<PackingItemReadModel>(configuration);
+
     base.OnModelCreating(modelBuilder);
   }
 }
