@@ -4,7 +4,7 @@ using PackIT.Domain.Repositories;
 using PackIT.Domain.ValueObjects;
 using PackIT.Shared.Abstractions.Commands;
 
-namespace PackIT.Application;
+namespace PackIT.Application.Handlers;
 
 public class CreatePackingListWithItemsHandler : ICommandHandler<CreatePackingListWithItems>
 {
@@ -42,7 +42,5 @@ public class CreatePackingListWithItemsHandler : ICommandHandler<CreatePackingLi
     var packingList = _factory.CreateWithDefaultItems(id, name, daysValue, gender, weather.Temperature, localization);
 
     await _repository.AddAsync(packingList);
-
-
   }
 }
