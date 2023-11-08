@@ -1,22 +1,25 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using PackIT.Infrastructure.EF;
-using PackIT.Infrastructure.EF.Options;
-using PackIT.Shared.Options;
-using PackIT.Shared.Queries;
+﻿using System.Linq.Expressions;
+using PackIT.Application.DTO;
+using PackIT.Infrastructure.EF.Models;
 
-namespace PackIT.Infrastructure;
+namespace PackIT.Infrastructure.Queries;
 
-public static class Extensions
+internal static class Extensions
 {
-  public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+  public static PackingListDto AsDto(this PackingListReadModel readModel) => new()
   {
-
-    services.AddPostgres(configuration);
-
-    services.AddQueries();
-
-    return services;
-  }
-
+    Id = readModel.Id,
+    Name = readModel.Name,
+    Localization = new LocalizationDto
+    {
+      City = readModel.Localization.City,
+      Country = readModel.Localization.Country
+    },
+    Items = readModel.Items?.Select(pi => new PackingItemDto
+    {
+      Name = pi.Name,
+      Quantity = pi.Quantity,
+      isPacked = pi.isPacked
+    })
+  };
 }
