@@ -17,8 +17,19 @@ internal sealed class SearchPackingListHandler : IQueryHandler<SearchPackingList
     _packingLists = context.PackingLists;
   }
 
-  public Task<IEnumerable<PackingListDto>> HandleAsync(SearchPackingLists query)
+  public async Task<IEnumerable<PackingListDto>> HandleAsync(SearchPackingLists query)
   {
-    return null;
+
+    var dbQuery = _packingLists
+      .Include(pl => pl.Items)
+      .AsQueryable();
+
+    if (query.SearchPhrase is not null)
+    {
+      dbQuery = dbQuery.Where(pl => Microsoft.EntityFrameworkCore.EF.Functions.ILike(pl.Name, $"%{query.SearchPhrase}%"));
+
+    }
+
+    return await dbQuery.Select(pl => pl.AsDto()).AsNoTracking().ToListAsync();
   }
 }

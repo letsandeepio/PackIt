@@ -5,5 +5,5 @@ namespace PackIT.Application.Queries;
 
 public class SearchPackingLists : IQuery<IEnumerable<PackingListDto>>
 {
-  public int SearchPhrase { get; set; }
+  public string SearchPhrase { get; set; }
 }
