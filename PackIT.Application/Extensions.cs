@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PackIT.Domain;
 using PackIT.Domain.Factories;
 using PackIT.Domain.Policies;
 using PackIT.Shared;
@@ -10,7 +11,7 @@ public static class Extensions
   public static IServiceCollection AddApplication(this IServiceCollection services)
   {
     services.AddCommands();
-    services.AddSingleton<IPackingListFactory, IPackingListFactory>();
+    services.AddSingleton<IPackingListFactory, PackingListFactory>();
 
     /* Automatically register the policy */
 
