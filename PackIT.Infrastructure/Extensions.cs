@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PackIT.Application;
 using PackIT.Infrastructure.EF;
 using PackIT.Shared.Queries;
 
@@ -11,8 +12,9 @@ public static class Extensions
   {
 
     services.AddPostgres(configuration);
-
     services.AddQueries();
+
+    services.AddSingleton<IWeatherService, DummyWeatherService>();
 
     return services;
   }
