@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PackIT.Application;
 using PackIT.Domain.Repositories;
 using PackIT.Infrastructure.EF.Contexts;
 using PackIT.Infrastructure.EF.Options;
+using PackIT.Infrastructure.EF.Services;
 using PackIT.Shared.Options;
 
 namespace PackIT.Infrastructure.EF;
@@ -14,6 +16,7 @@ internal static class Extensions
   {
 
     services.AddScoped<IPackingListRepository, PostgresPackingListRepository>();
+    services.AddScoped<IPackingListReadService, PostgresPackingListReadService>();
 
     var options = configuration.GetOptions<PostgresOptions>("Postgres");
 
