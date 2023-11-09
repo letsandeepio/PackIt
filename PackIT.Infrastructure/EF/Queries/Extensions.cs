@@ -19,7 +19,7 @@ internal static class Extensions
     {
       Name = pi.Name,
       Quantity = pi.Quantity,
-      isPacked = pi.isPacked
+      isPacked = pi.IsPacked
     })
   };
 }
