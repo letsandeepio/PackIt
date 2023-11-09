@@ -43,34 +43,32 @@ public class PackingListController : BaseController
     return CreatedAtAction(nameof(Get), new { id = command.Id });
   }
 
-  [HttpPost("{packingListId}/items")]
-  public async Task<IActionResult> Post([FromBody] AddPackingItem command)
+  [HttpPut("{packingListId:guid}/items")]
+  public async Task<IActionResult> Put([FromBody] AddPackingItem command)
   {
     await _commandDispatcher.DispatchAsync(command);
     return Ok();
   }
 
 
-  [HttpPost("{packingListId}/items/{name}/pack")]
-  public async Task<IActionResult> Post([FromBody] PackItem command)
+  [HttpPut("{packingListId:guid}/items/{name}/pack")]
+  public async Task<IActionResult> Put([FromBody] PackItem command)
   {
     await _commandDispatcher.DispatchAsync(command);
     return Ok();
   }
 
-  [HttpDelete("{packingListId}/items/{name}/pack")]
-  public async Task<IActionResult> Post([FromBody] RemovePackingItem command)
+  [HttpDelete("{packingListId:guid}/items/{name}/pack")]
+  public async Task<IActionResult> Delete([FromBody] RemovePackingItem command)
   {
     await _commandDispatcher.DispatchAsync(command);
     return Ok();
   }
 
-  [HttpDelete("{packingListId}")]
-  public async Task<IActionResult> Post([FromBody] RemovePackingList command)
+  [HttpDelete("{id:guid}")]
+  public async Task<IActionResult> Delete([FromBody] RemovePackingList command)
   {
     await _commandDispatcher.DispatchAsync(command);
     return Ok();
   }
-
-
 }
