@@ -12,12 +12,12 @@ public class PackingList : AggregateRoot<PackingListId>
   private readonly Localization _localization;
   private readonly LinkedList<PackingItem> _items = new();
 
-  private PackingList(PackingListId id, string name, Localization localization, LinkedList<PackingItem> items) : this(id, name, localization)
+  private PackingList(PackingListId id, PackingListName name, Localization localization, LinkedList<PackingItem> items) : this(id, name, localization)
   {
     _items = items;
   }
 
-  internal PackingList(PackingListId id, string name, Localization localization)
+  internal PackingList(PackingListId id, PackingListName name, Localization localization)
   {
     Id = id;
     _name = name;
