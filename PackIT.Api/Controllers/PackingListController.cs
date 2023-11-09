@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PackIT.Application;
+using PackIT.Application.Commands;
 using PackIT.Application.DTO;
 using PackIT.Application.Queries;
 using PackIT.Shared.Abstractions.Commands;
@@ -34,5 +35,42 @@ public class PackingListController : BaseController
     var result = await _queryDispatcher.QueryAsync(query);
     return OkOrNotFound(result);
   }
+
+  [HttpPost]
+  public async Task<IActionResult> Post([FromBody] CreatePackingListWithItems command)
+  {
+    await _commandDispatcher.DispatchAsync(command);
+    return CreatedAtAction(nameof(Get), new { id = command.Id });
+  }
+
+  [HttpPost("{packingListId}/items")]
+  public async Task<IActionResult> Post([FromBody] AddPackingItem command)
+  {
+    await _commandDispatcher.DispatchAsync(command);
+    return Ok();
+  }
+
+
+  [HttpPost("{packingListId}/items/{name}/pack")]
+  public async Task<IActionResult> Post([FromBody] PackItem command)
+  {
+    await _commandDispatcher.DispatchAsync(command);
+    return Ok();
+  }
+
+  [HttpDelete("{packingListId}/items/{name}/pack")]
+  public async Task<IActionResult> Post([FromBody] RemovePackingItem command)
+  {
+    await _commandDispatcher.DispatchAsync(command);
+    return Ok();
+  }
+
+  [HttpDelete("{packingListId}")]
+  public async Task<IActionResult> Post([FromBody] RemovePackingList command)
+  {
+    await _commandDispatcher.DispatchAsync(command);
+    return Ok();
+  }
+
 
 }
