@@ -2,7 +2,7 @@
 using PackIT.Domain;
 using PackIT.Domain.Factories;
 using PackIT.Domain.Policies;
-using PackIT.Shared;
+using PackIT.Shared.Commands;
 
 namespace PackIT.Application;
 
