@@ -22,15 +22,17 @@ public class PackingListController : BaseController
     _queryDispatcher = queryDispatcher;
   }
 
-  [HttpGet("{id:guid}")]
-  public async Task<ActionResult<PackingListDto>> Get([FromRoute] GetPackingList query)
+
+  [HttpGet]
+  public async Task<ActionResult<IEnumerable<PackingListDto>>> Get([FromRoute] SearchPackingLists query)
   {
     var result = await _queryDispatcher.QueryAsync(query);
     return OkOrNotFound(result);
   }
 
-  [HttpGet]
-  public async Task<ActionResult<IEnumerable<PackingListDto>>> Get([FromRoute] SearchPackingLists query)
+
+  [HttpGet("{id:guid}")]
+  public async Task<ActionResult<PackingListDto>> Get([FromRoute] GetPackingList query)
   {
     var result = await _queryDispatcher.QueryAsync(query);
     return OkOrNotFound(result);
