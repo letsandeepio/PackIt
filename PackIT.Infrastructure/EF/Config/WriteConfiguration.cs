@@ -24,7 +24,7 @@ internal sealed class WriteConfiguration : IEntityTypeConfiguration<PackingList>
 
     builder.Property(typeof(PackingListName), "_name").HasConversion(packingListNameConverter).HasColumnName("Name");
 
-    builder.HasMany(typeof(PackingItem), "_items");
+    builder.HasMany(typeof(PackingItem), "_items").WithOne().OnDelete(DeleteBehavior.Cascade);
 
     builder.ToTable("PackingLists");
 

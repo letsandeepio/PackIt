@@ -60,6 +60,15 @@ public class PackingListController : BaseController
     return Ok();
   }
 
+
+  [HttpDelete("{id:guid}")]
+  public async Task<IActionResult> Delete([FromRoute] RemovePackingList command)
+  {
+    await _commandDispatcher.DispatchAsync(command);
+    return Ok();
+  }
+
+
   [HttpDelete("{packingListId:guid}/items/{name}/pack")]
   public async Task<IActionResult> Delete([FromBody] RemovePackingItem command)
   {
@@ -67,10 +76,5 @@ public class PackingListController : BaseController
     return Ok();
   }
 
-  [HttpDelete("{id:guid}")]
-  public async Task<IActionResult> Delete([FromBody] RemovePackingList command)
-  {
-    await _commandDispatcher.DispatchAsync(command);
-    return Ok();
-  }
+
 }
