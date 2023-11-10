@@ -15,18 +15,12 @@ internal sealed class GetPackingListHandler : IQueryHandler<GetPackingList, Pack
 
   public GetPackingListHandler(ReadDbContext context) => _packingLists = context.PackingLists;
 
-  public async Task<PackingListDto> HandleAsync(GetPackingList query)
+  public async Task<PackingListDto?> HandleAsync(GetPackingList query)
   {
     var packingLists = _packingLists?.Include(pl => pl.Items).AsNoTracking();
     var packingList = packingLists?.FirstOrDefault(pl => pl.Id == query.Id);
 
-    if (packingList == null)
-    {
-      // Log or throw an exception
-      throw new Exception($"No PackingList found with Id {query.Id}");
-    }
-
-    return packingList.AsDto();
+    return packingList?.AsDto();
 
   }
 

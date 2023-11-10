@@ -27,9 +27,10 @@ internal sealed class SearchPackingListHandler : IQueryHandler<SearchPackingList
     if (query.SearchPhrase is not null)
     {
       dbQuery = dbQuery.Where(pl => Microsoft.EntityFrameworkCore.EF.Functions.ILike(pl.Name, $"%{query.SearchPhrase}%"));
-
     }
 
-    return await dbQuery.Select(pl => pl.AsDto()).AsNoTracking().ToListAsync();
+    var queryResult = await dbQuery.Select(pl => pl.AsDto()).AsNoTracking().ToListAsync();
+
+    return queryResult;
   }
 }

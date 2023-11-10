@@ -24,7 +24,7 @@ public class PackingListController : BaseController
 
 
   [HttpGet]
-  public async Task<ActionResult<IEnumerable<PackingListDto>>> Get([FromRoute] SearchPackingLists query)
+  public async Task<ActionResult<IEnumerable<PackingListDto>>> Get([FromQuery] SearchPackingLists query)
   {
     var result = await _queryDispatcher.QueryAsync(query);
     return OkOrNotFound(result);
