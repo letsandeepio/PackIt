@@ -24,7 +24,7 @@ internal sealed class WriteConfiguration : IEntityTypeConfiguration<PackingList>
 
     builder.Property(typeof(PackingListName), "_name").HasConversion(packingListNameConverter).HasColumnName("Name");
 
-    builder.HasMany(typeof(PackingItem), "_items").WithOne().OnDelete(DeleteBehavior.Cascade);
+    builder.HasMany(typeof(PackingItem), "_items").WithOne().HasForeignKey("PackingListId").OnDelete(DeleteBehavior.Cascade);
 
     builder.ToTable("PackingLists");
 
@@ -32,6 +32,9 @@ internal sealed class WriteConfiguration : IEntityTypeConfiguration<PackingList>
 
   public void Configure(EntityTypeBuilder<PackingItem> builder)
   {
+
+    builder.Property<PackingListId>("PackingListId");
+
     builder.Property<Guid>("Id");
     builder.Property(pi => pi.Name);
     builder.Property(pi => pi.Quantity);

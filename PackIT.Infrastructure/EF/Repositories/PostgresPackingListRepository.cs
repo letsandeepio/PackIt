@@ -39,7 +39,11 @@ internal sealed class PostgresPackingListRepository : IPackingListRepository
 
   public async Task UpdateAsync(PackingList packingList)
   {
+
+
+
     _packingLists.Update(packingList);
+
     await _writeDbContext.SaveChangesAsync();
   }
 }

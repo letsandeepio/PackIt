@@ -20,8 +20,17 @@ internal static class Extensions
 
     var options = configuration.GetOptions<PostgresOptions>("Postgres");
 
-    services.AddDbContext<ReadDbContext>(ctx => ctx.UseNpgsql(options.ConnectionString));
-    services.AddDbContext<WriteDbContext>(ctx => ctx.UseNpgsql(options.ConnectionString));
+    services.AddDbContext<ReadDbContext>(ctx =>
+    {
+      ctx.UseNpgsql(options.ConnectionString);
+      ctx.EnableSensitiveDataLogging();
+
+    });
+    services.AddDbContext<WriteDbContext>(ctx =>
+    {
+      ctx.UseNpgsql(options.ConnectionString);
+      ctx.EnableSensitiveDataLogging();
+    });
 
     return services;
   }
