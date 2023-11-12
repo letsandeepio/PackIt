@@ -54,7 +54,7 @@ public class PackingListController : BaseController
 
 
   [HttpPut("{packingListId:guid}/items/{name}/pack")]
-  public async Task<IActionResult> Put([FromBody] PackItem command)
+  public async Task<IActionResult> Put([FromRoute] PackItem command)
   {
     await _commandDispatcher.DispatchAsync(command);
     return Ok();
@@ -70,7 +70,7 @@ public class PackingListController : BaseController
 
 
   [HttpDelete("{packingListId:guid}/items/{name}/pack")]
-  public async Task<IActionResult> Delete([FromBody] RemovePackingItem command)
+  public async Task<IActionResult> Delete([FromRoute] RemovePackingItem command)
   {
     await _commandDispatcher.DispatchAsync(command);
     return Ok();

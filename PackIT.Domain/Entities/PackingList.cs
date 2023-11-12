@@ -10,7 +10,7 @@ public class PackingList : AggregateRoot<PackingListId>
   public PackingListId Id { get; private set; }
   private readonly PackingListName _name;
   private readonly Localization _localization;
-  private readonly LinkedList<PackingItem> _items = new();
+  private readonly LinkedList<PackingItem> _items = new LinkedList<PackingItem>();
 
   private PackingList(PackingListId id, PackingListName name, Localization localization, LinkedList<PackingItem> items) : this(id, name, localization)
   {
@@ -52,9 +52,7 @@ public class PackingList : AggregateRoot<PackingListId>
 
     var packedItem = item with { IsPacked = true };
 
-    var currentItem = _items.Find(item) ?? throw new Exception("Item not found");
-
-    currentItem.Value = packedItem;
+    _items.Find(item).Value = packedItem;
 
     AddEvent(new PackingItemPacked(this, item));
 
