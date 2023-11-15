@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using PackIT.Application;
 using PackIT.Application.DTO;
-using PackIT.Domain.Repositories;
 using PackIT.Infrastructure.EF.Contexts;
 using PackIT.Infrastructure.EF.Models;
 using PackIT.Shared.Abstractions.Queries;

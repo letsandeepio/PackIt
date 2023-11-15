@@ -10,9 +10,9 @@ public class PackingList : AggregateRoot<PackingListId>
   public PackingListId Id { get; private set; }
   private readonly PackingListName _name;
   private readonly Localization _localization;
-  private readonly LinkedList<PackingItem> _items = new LinkedList<PackingItem>();
+  private List<PackingItem> _items { get; set; } = new();
 
-  private PackingList(PackingListId id, PackingListName name, Localization localization, LinkedList<PackingItem> items) : this(id, name, localization)
+  private PackingList(PackingListId id, PackingListName name, Localization localization, List<PackingItem> items) : this(id, name, localization)
   {
     _items = items;
   }
@@ -33,7 +33,7 @@ public class PackingList : AggregateRoot<PackingListId>
       throw new PackingItemAlreadyExistException(_name, item.Name);
     }
 
-    _items.AddLast(item);
+    _items.Add(item);
 
     AddEvent(new PackingItemAdded(this, item));
   }
@@ -52,7 +52,13 @@ public class PackingList : AggregateRoot<PackingListId>
 
     var packedItem = item with { IsPacked = true };
 
-    _items.Find(item).Value = packedItem;
+    var itemToReplace = _items.Find(i => i.Name == item.Name);
+
+    if (itemToReplace != null)
+    {
+      var index = _items.IndexOf(itemToReplace);
+      _items[index] = packedItem;
+    }
 
     AddEvent(new PackingItemPacked(this, item));
 
