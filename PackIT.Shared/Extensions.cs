@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PackIT.Shared;
 
@@ -8,6 +9,14 @@ public static class Extensions
   {
 
     services.AddHostedService<AppInitializer>();
+    services.AddScoped<ExceptionMiddleware>();
     return services;
   }
+
+  public static IApplicationBuilder UseShared(this IApplicationBuilder app)
+  {
+    app.UseMiddleware<ExceptionMiddleware>();
+    return app;
+  }
+
 }
