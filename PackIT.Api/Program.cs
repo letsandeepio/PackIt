@@ -24,6 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseShared();
+
 app.UseHttpsRedirection();
 
 app.MapControllers();

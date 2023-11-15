@@ -50,18 +50,9 @@ public class PackingList : AggregateRoot<PackingListId>
   {
     var item = GetItem(itemName);
 
-    var packedItem = item with { IsPacked = true };
-
-    var itemToReplace = _items.Find(i => i.Name == item.Name);
-
-    if (itemToReplace != null)
-    {
-      var index = _items.IndexOf(itemToReplace);
-      _items[index] = packedItem;
-    }
+    item.IsPacked = true;
 
     AddEvent(new PackingItemPacked(this, item));
-
   }
 
   private PackingItem GetItem(string itemName)
