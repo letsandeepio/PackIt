@@ -69,7 +69,7 @@ public class PackingListController : BaseController
   }
 
 
-  [HttpDelete("{packingListId:guid}/items/{name}/pack")]
+  [HttpDelete("{packingListId:guid}/items/{name}")]
   public async Task<IActionResult> Delete([FromRoute] RemovePackingItem command)
   {
     await _commandDispatcher.DispatchAsync(command);

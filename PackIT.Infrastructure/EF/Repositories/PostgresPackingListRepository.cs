@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PackIT.Domain;
 using PackIT.Domain.Entities;
 using PackIT.Domain.Repositories;
 using PackIT.Domain.ValueObjects;
@@ -43,6 +44,17 @@ internal sealed class PostgresPackingListRepository : IPackingListRepository
     await _writeDbContext.SaveChangesAsync();
   }
 
+  public async Task DeletePackingItemAsync(PackingListId packingListId, string name)
+  {
+    var packingList = _writeDbContext.PackingLists.Find(packingListId);
+
+    if (packingList is not null)
+    {
+      packingList.RemoveItem(name);
+
+      await _writeDbContext.SaveChangesAsync();
+    }
+  }
 
 
 }

@@ -41,5 +41,9 @@ internal sealed class WriteConfiguration : IEntityTypeConfiguration<PackingList>
     builder.Property(pi => pi.IsPacked);
 
     builder.ToTable("PackingItems");
+
+    // on model delete delete it from database
+    builder.HasOne(typeof(PackingList)).WithMany("_items").HasForeignKey("PackingListId").OnDelete(DeleteBehavior.Cascade);
+
   }
 }
