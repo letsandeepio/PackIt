@@ -20,7 +20,10 @@ internal sealed class RemovePackingItemHandler : ICommandHandler<RemovePackingIt
     {
       throw new PackingListNotFoundException(command.PackingListId);
     }
-    await _repository.DeletePackingItemAsync(command.PackingListId, command.Name);
+
+    packingList.RemoveItem(command.Name);
+
+    await _repository.UpdateAsync(packingList);
 
 
   }
