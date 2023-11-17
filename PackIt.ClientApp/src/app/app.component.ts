@@ -11,6 +11,7 @@ import { TabState } from './store/tab/tab.reducer';
 import { selectAllTabs } from './store/tab/tab.selectors';
 import { addTab } from './store/tab/tab.actions';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
     RouterModule,
     MatTabsModule,
     MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
