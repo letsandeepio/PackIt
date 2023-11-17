@@ -10,11 +10,13 @@ import {
   getPackingListsError,
   getPackingListsLoading,
 } from '../../store/packinglist/packinglist.selectors';
+import { MatButtonModule } from '@angular/material/button';
+import { addTab } from '../../store/tab/tab.actions';
 
 @Component({
   selector: 'app-packing-list-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule],
   templateUrl: './packing-list-table.component.html',
   styleUrl: './packing-list-table.component.scss',
 })
@@ -24,7 +26,7 @@ export class PackingListTableComponent {
 
   packingListsDataSource!: PackingList[];
 
-  displayedColumns: string[] = ['id', 'name'];
+  displayedColumns: string[] = ['id', 'name', 'edit'];
 
   constructor(private store: Store) {}
 
@@ -36,5 +38,17 @@ export class PackingListTableComponent {
     this.loading$ = this.store.select(getPackingListsLoading);
     this.error$ = this.store.select(getPackingListsError);
     this.store.dispatch(loadPackingLists());
+  }
+
+  editPackingList(packinglist: PackingList): void {
+    this.store.dispatch(
+      addTab({
+        tab: {
+          id: packinglist.id,
+          link: 'packinglist/' + packinglist.id,
+          title: packinglist.name,
+        },
+      })
+    );
   }
 }
