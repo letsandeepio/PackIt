@@ -1,24 +1,26 @@
-import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 
 interface AddPackingListDialogData {
   name: string;
   description: string;
+  gender: 'male' | 'female';
 }
 
 @Component({
@@ -32,6 +34,7 @@ interface AddPackingListDialogData {
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
+    MatRadioModule,
   ],
   templateUrl: './add-packing-list-dialog.component.html',
   styleUrl: './add-packing-list-dialog.component.scss',
@@ -40,6 +43,7 @@ export class AddPackingListDialogComponent {
   packingListForm = this.formBuilder.group({
     name: ['', Validators.required],
     description: [''],
+    gender: [''],
   });
 
   constructor(
@@ -52,9 +56,36 @@ export class AddPackingListDialogComponent {
 
   onSubmit(): void {
     // Process the form data here
+    this.dialogRef.close(this.packingListForm.value);
   }
 
   onCancel(): void {
     // Handle cancel action
+  }
+
+  getErrorMessage(fieldName: string) {
+    let field = this.packingListForm.get(fieldName);
+
+    if (field?.hasError('required')) {
+      return `The ${fieldName} is required`;
+    }
+
+    // Add other error types as needed
+    // if (field.hasError('minlength')) {
+    //   return 'The value is too short';
+    // }
+
+    return '';
+  }
+
+  checkForErrorsIn(formControl: AbstractControl): string {
+    if (formControl.hasError('required')) {
+      return 'Min value is required';
+    }
+
+    if (formControl.hasError('min') || formControl.hasError('max')) {
+      return 'Value must be between 1980 and 2020';
+    }
+    return '';
   }
 }

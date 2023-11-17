@@ -1,12 +1,22 @@
 <mat-dialog-content>
   <h2 mat-dialog-title>Add New Packing List</h2>
   <form [formGroup]="packingListForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <input matInput placeholder="Name" formControlName="name" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Description" formControlName="description">
-    </mat-form-field>
+    <div class="form-field-container">
+      <mat-form-field>
+        <input matInput placeholder="Name" formControlName="name" required>
+        <mat-error>{{getErrorMessage("name")}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Description" formControlName="description">
+      </mat-form-field>
+
+          <!-- gender radio buttons -->
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+          </mat-radio-group>
+
+    </div>
     <div mat-dialog-actions>
       <button mat-button (click)="onCancel()">Cancel</button>
       <button mat-button color="primary" type="submit" [disabled]="packingListForm.invalid">Save</button>
