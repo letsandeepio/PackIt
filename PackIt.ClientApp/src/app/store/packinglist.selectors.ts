@@ -1,15 +1,14 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { PackingListState } from './packinglist.reducer';
 
-const PackingFeatureKey = 'packinglist';
+export const PackingFeatureKey = 'packingList';
 
 export const getPackingListState =
   createFeatureSelector<PackingListState>(PackingFeatureKey);
 
-export const getPackingLists = createSelector(
-  getPackingListState,
-  (state) => state.packinglists
-);
+export const getPackingLists = createSelector(getPackingListState, (state) => {
+  return state.packinglists;
+});
 
 export const getPackingListsLoading = createSelector(
   getPackingListState,
