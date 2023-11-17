@@ -1,29 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { PackingList } from '../../models/packinglist.model';
-import {
-  deletePackingList,
-  loadPackingLists,
-} from '../../store/packinglist/packinglist.actions';
+import { loadPackingLists } from '../../store/packinglist/packinglist.actions';
 import {
   getPackingLists,
   getPackingListsError,
   getPackingListsLoading,
 } from '../../store/packinglist/packinglist.selectors';
-import { MatButtonModule } from '@angular/material/button';
 import { addTab } from '../../store/tab/tab.actions';
 
-import {
-  MatDialog,
-  MatDialogRef,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogTitle,
-  MatDialogContent,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { DeletePackingListConfirmationDialogComponent } from '../delete-packing-list-confirmation-dialog/delete-packing-list-confirmation-dialog.component';
 
 @Component({
   selector: 'app-packing-list-table',
@@ -41,6 +32,17 @@ export class PackingListTableComponent {
   displayedColumns: string[] = ['id', 'name', 'edit', 'delete'];
 
   constructor(private store: Store, public dialog: MatDialog) {}
+
+  openDialog(packingListName: string): void {
+    const dialogRef = this.dialog.open(
+      DeletePackingListConfirmationDialogComponent,
+      {
+        data: { packingListName, confirm: false },
+      }
+    );
+
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
 
   ngOnInit(): void {
     this.store.select(getPackingLists).subscribe((packingLists) => {
@@ -65,7 +67,8 @@ export class PackingListTableComponent {
   }
 
   deletePackingList(packinglist: PackingList): void {
-    console.log('delete packinglist: ' + packinglist.id);
-    this.store.dispatch(deletePackingList({ id: packinglist.id }));
+    // this.store.dispatch(deletePackingList({ id: packinglist.id }));
+
+    this.openDialog(packinglist.name);
   }
 }

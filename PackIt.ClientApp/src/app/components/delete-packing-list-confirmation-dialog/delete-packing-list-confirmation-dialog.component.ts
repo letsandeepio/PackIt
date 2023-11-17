@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogModule,
@@ -13,7 +14,7 @@ export interface DialogData {
 @Component({
   selector: 'app-delete-packing-list-confirmation-dialog',
   standalone: true,
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, MatButtonModule],
   templateUrl: './delete-packing-list-confirmation-dialog.component.html',
   styleUrl: './delete-packing-list-confirmation-dialog.component.scss',
 })

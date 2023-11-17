@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {}
 
   addTab() {
-    console.log('add tab');
     this.store.dispatch(
       addTab({
         tab: { id: 'test', link: 'packinglist/test', title: 'Test Tab' },
