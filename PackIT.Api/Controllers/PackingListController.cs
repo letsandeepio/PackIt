@@ -22,7 +22,6 @@ public class PackingListController : BaseController
     _queryDispatcher = queryDispatcher;
   }
 
-
   [HttpGet]
   public async Task<ActionResult<IEnumerable<PackingListDto>>> Get([FromQuery] SearchPackingLists query)
   {
