@@ -4,17 +4,18 @@ import {
   loadPackingListsFailure,
   loadPackingListsSuccess,
 } from './packinglist.actions';
+import { PackingList } from '../models/packinglist.model';
 
 export interface PackingListState {
-  packinglists: Event[];
+  packinglists: PackingList[];
   loading: boolean;
-  error: string;
+  error: Error | null;
 }
 
 export const initialState: PackingListState = {
   packinglists: [],
   loading: false,
-  error: '',
+  error: null,
 };
 
 export const packingListReducer = createReducer(

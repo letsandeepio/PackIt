@@ -3,20 +3,20 @@ import { PackingListState } from './packinglist.reducer';
 
 const PackingFeatureKey = 'packinglist';
 
-export const selectPackingListState =
+export const getPackingListState =
   createFeatureSelector<PackingListState>(PackingFeatureKey);
 
-export const selectPackingLists = createSelector(
-  selectPackingListState,
+export const getPackingLists = createSelector(
+  getPackingListState,
   (state) => state.packinglists
 );
 
-export const selectPackingListLoading = createSelector(
-  selectPackingListState,
+export const getPackingListsLoading = createSelector(
+  getPackingListState,
   (state) => state.loading
 );
 
-export const selectPackingListError = createSelector(
-  selectPackingListState,
+export const getPackingListsError = createSelector(
+  getPackingListState,
   (state) => state.error
 );

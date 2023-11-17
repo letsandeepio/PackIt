@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PackingList } from '../models/packinglist.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,9 @@ import { Observable } from 'rxjs';
 export class PackingListService {
   constructor(private http: HttpClient) {}
 
-  getPackingLists(): Observable<Event[]> {
-    return this.http.get<Event[]>('http://localhost:5296/api/PackingList');
+  getPackingLists(): Observable<PackingList[]> {
+    return this.http.get<PackingList[]>(
+      'http://localhost:5296/api/PackingList'
+    );
   }
 }
