@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { AppTitleBarComponent } from './app-title-bar/app-title-bar.component';
+import { AppTitleBarComponent } from './components/app-title-bar/app-title-bar.component';
 
 @Component({
   selector: 'app-root',
