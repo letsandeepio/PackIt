@@ -3,24 +3,53 @@
   <form [formGroup]="packingListForm" (ngSubmit)="onSubmit()">
     <div class="form-field-container">
       <mat-form-field>
-        <input matInput placeholder="Name" formControlName="name" required>
-        <mat-error>{{getErrorMessage("name")}}</mat-error>
+        <input matInput placeholder="Name" formControlName="name" required />
+        <mat-error>{{ getErrorMessage("name") }}</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Description" formControlName="description">
+        <input
+          matInput
+          placeholder="Country"
+          formControlName="country"
+        />
+        <mat-error>{{ getErrorMessage("country") }}</mat-error>
       </mat-form-field>
 
-          <!-- gender radio buttons -->
-          <mat-radio-group formControlName="gender">
-            <mat-radio-button value="male">Male</mat-radio-button>
-            <mat-radio-button value="female">Female</mat-radio-button>
-          </mat-radio-group>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="City"
+          formControlName="city"
+        />
+        <mat-error>{{ getErrorMessage("city") }}</mat-error>
+      </mat-form-field>
 
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Days"
+          formControlName="days"
+        />
+        <mat-error>{{ getErrorMessage("days") }}</mat-error>
+      </mat-form-field>
+
+      <mat-radio-group formControlName="gender">
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+        <mat-error>{{ getErrorMessage("gender") }}</mat-error>
+      </mat-radio-group>
     </div>
+
     <div mat-dialog-actions>
       <button mat-button (click)="onCancel()">Cancel</button>
-      <button mat-button color="primary" type="submit" [disabled]="packingListForm.invalid">Save</button>
+      <button
+        mat-button
+        color="primary"
+        type="submit"
+        [disabled]="packingListForm.invalid"
+      >
+        Save
+      </button>
     </div>
   </form>
 </mat-dialog-content>
-

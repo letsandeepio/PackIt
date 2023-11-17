@@ -3,6 +3,7 @@ import { Component, Inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -19,7 +20,6 @@ import { MatRadioModule } from '@angular/material/radio';
 
 interface AddPackingListDialogData {
   name: string;
-  description: string;
   gender: 'male' | 'female';
 }
 
@@ -42,8 +42,10 @@ interface AddPackingListDialogData {
 export class AddPackingListDialogComponent {
   packingListForm = this.formBuilder.group({
     name: ['', Validators.required],
-    description: [''],
-    gender: [''],
+    gender: ['', Validators.required],
+    city: ['', Validators.required],
+    country: ['', Validators.required],
+    days: ['', Validators.required],
   });
 
   constructor(
@@ -55,12 +57,15 @@ export class AddPackingListDialogComponent {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    // Process the form data here
-    this.dialogRef.close(this.packingListForm.value);
+    if (this.packingListForm.invalid) {
+      this.dialogRef.close();
+    } else {
+      this.dialogRef.close(this.packingListForm.value);
+    }
   }
 
   onCancel(): void {
-    // Handle cancel action
+    this.dialogRef.close();
   }
 
   getErrorMessage(fieldName: string) {
