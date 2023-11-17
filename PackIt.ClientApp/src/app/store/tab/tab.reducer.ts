@@ -11,7 +11,16 @@ export interface TabState extends EntityState<Tab> {
 export const adapter: EntityAdapter<Tab> = createEntityAdapter<Tab>({});
 
 export const initialState: TabState = adapter.getInitialState({
-  activeTab: null,
+  activeTab: 'home',
+  ids: ['home'],
+  entities: {
+    home: {
+      id: 'home',
+      link: '/',
+      title: 'Home',
+      icon: 'home',
+    },
+  },
 });
 
 export const tabReducer = createReducer(

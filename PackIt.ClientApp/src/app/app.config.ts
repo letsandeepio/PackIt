@@ -9,12 +9,13 @@ import { provideEffects } from '@ngrx/effects';
 import { PackingListEffects } from './store/packinglist/packinglist.effects';
 import { provideHttpClient } from '@angular/common/http';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { tabReducer } from './store/tab/tab.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideAnimations(),
-    provideStore({ packingList: packingListReducer }),
+    provideStore({ packingList: packingListReducer, tabs: tabReducer }),
     provideEffects([PackingListEffects]),
     provideHttpClient(),
     provideStoreDevtools({
