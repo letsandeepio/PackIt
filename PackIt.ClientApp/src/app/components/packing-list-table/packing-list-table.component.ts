@@ -4,7 +4,10 @@ import { MatTableModule } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { PackingList } from '../../models/packinglist.model';
-import { loadPackingLists } from '../../store/packinglist/packinglist.actions';
+import {
+  deletePackingList,
+  loadPackingLists,
+} from '../../store/packinglist/packinglist.actions';
 import {
   getPackingLists,
   getPackingListsError,
@@ -26,7 +29,7 @@ export class PackingListTableComponent {
 
   packingListsDataSource!: PackingList[];
 
-  displayedColumns: string[] = ['id', 'name', 'edit'];
+  displayedColumns: string[] = ['id', 'name', 'edit', 'delete'];
 
   constructor(private store: Store) {}
 
@@ -50,5 +53,10 @@ export class PackingListTableComponent {
         },
       })
     );
+  }
+
+  deletePackingList(packinglist: PackingList): void {
+    console.log('delete packinglist: ' + packinglist.id);
+    this.store.dispatch(deletePackingList({ id: packinglist.id }));
   }
 }

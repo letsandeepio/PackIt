@@ -16,4 +16,8 @@ export class PackingListService {
       'http://localhost:5296/api/PackingList'
     );
   }
+
+  deletePackingList(id: string): Observable<any> {
+    return this.http.delete<any>('http://localhost:5296/api/PackingList/' + id);
+  }
 }

@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  deletePackingListSuccess,
   loadPackingLists,
   loadPackingListsFailure,
   loadPackingListsSuccess,
@@ -33,5 +34,9 @@ export const packingListReducer = createReducer(
     ...state,
     loading: false,
     error: error,
+  })),
+  on(deletePackingListSuccess, (state, { id }) => ({
+    ...state,
+    packinglists: state.packinglists.filter((b) => b.id !== id),
   }))
 );
