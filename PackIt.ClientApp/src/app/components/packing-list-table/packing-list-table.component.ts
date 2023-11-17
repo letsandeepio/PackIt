@@ -16,6 +16,15 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { addTab } from '../../store/tab/tab.actions';
 
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
+
 @Component({
   selector: 'app-packing-list-table',
   standalone: true,
@@ -31,7 +40,7 @@ export class PackingListTableComponent {
 
   displayedColumns: string[] = ['id', 'name', 'edit', 'delete'];
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.store.select(getPackingLists).subscribe((packingLists) => {
