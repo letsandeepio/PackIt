@@ -17,6 +17,15 @@ import { AddPackingListDialogComponent } from './components/add-packing-list-dia
 import { PackingList } from './models/packinglist.model';
 import { addPackingList } from './store/packinglist/packinglist.actions';
 import { v4 as uuidv4 } from 'uuid';
+import { AddPackingListRequest } from './services/packinglist.service';
+
+export interface AddPackingListDialogData {
+  name: string;
+  gender: 'male' | 'female';
+  city: string;
+  days: number;
+  country: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -60,12 +69,29 @@ export class AppComponent implements OnInit {
       data: { name: '', description: '' },
     });
 
-    dialogRef.afterClosed().subscribe((result: PackingList) => {
-      console.log(result);
+    dialogRef.afterClosed().subscribe((result: AddPackingListDialogData) => {
+      const request = this.mapPackingListToRequest(result);
 
       this.store.dispatch(
-        addPackingList({ packingList: { ...result, id: uuidv4() } })
+        addPackingList({
+          packingList: request,
+        })
       );
     });
+  }
+
+  private mapPackingListToRequest(
+    packingList: AddPackingListDialogData
+  ): AddPackingListRequest {
+    return {
+      id: uuidv4(),
+      name: packingList.name,
+      gender: packingList.gender === 'male' ? 0 : 1,
+      days: Number(packingList.days),
+      localization: {
+        city: packingList.city,
+        country: packingList.country,
+      },
+    };
   }
 }

@@ -3,7 +3,6 @@ import { Component, Inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -17,11 +16,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-
-interface AddPackingListDialogData {
-  name: string;
-  gender: 'male' | 'female';
-}
+import { AddPackingListDialogData } from '../../app.component';
 
 @Component({
   selector: 'app-add-packing-list-dialog',

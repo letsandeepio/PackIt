@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { PackingList } from '../../models/packinglist.model';
+import { AddPackingListRequest } from '../../services/packinglist.service';
 
 export const loadPackingLists = createAction('[PackingList] Load PackingLists');
 
@@ -30,7 +31,7 @@ export const deletePackingListFailure = createAction(
 
 export const addPackingList = createAction(
   '[PackingList] Add PackingList',
-  props<{ packingList: PackingList }>()
+  props<{ packingList: AddPackingListRequest }>()
 );
 
 export const addPackingListSuccess = createAction(
