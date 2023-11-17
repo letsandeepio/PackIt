@@ -3,6 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { PackingListService } from '../../services/event.service';
 import {
+  addPackingList,
+  addPackingListFailure,
+  addPackingListSuccess,
   deletePackingList,
   deletePackingListFailure,
   deletePackingListSuccess,
@@ -32,6 +35,18 @@ export class PackingListEffects {
         this.packingListService.deletePackingList(action.id).pipe(
           map(() => deletePackingListSuccess({ id: action.id })),
           catchError((error) => of(deletePackingListFailure({ error })))
+        )
+      )
+    )
+  );
+
+  addPackingList$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(addPackingList),
+      mergeMap((action) =>
+        this.packingListService.addPackingList(action.packingList).pipe(
+          map((data) => addPackingListSuccess({ packingList: data })),
+          catchError((error) => of(addPackingListFailure({ error })))
         )
       )
     )

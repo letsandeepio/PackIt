@@ -14,6 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPackingListDialogComponent } from './components/add-packing-list-dialog/add-packing-list-dialog.component';
+import { PackingList } from './models/packinglist.model';
+import { addPackingList } from './store/packinglist/packinglist.actions';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-root',
@@ -57,9 +60,12 @@ export class AppComponent implements OnInit {
       data: { name: '', description: '' },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((result: PackingList) => {
       console.log(result);
+
+      this.store.dispatch(
+        addPackingList({ packingList: { ...result, id: uuidv4() } })
+      );
     });
   }
 }

@@ -57,6 +57,9 @@ export class AddPackingListDialogComponent {
   ngOnInit(): void {}
 
   onSubmit(): void {
+    console.log(this.packingListForm.value);
+    console.log(this.packingListForm.valid);
+
     if (this.packingListForm.invalid) {
       this.dialogRef.close();
     } else {
