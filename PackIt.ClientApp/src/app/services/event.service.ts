@@ -10,6 +10,8 @@ export class PackingListService {
   constructor(private http: HttpClient) {}
 
   getPackingLists(): Observable<PackingList[]> {
+    console.log('I worked');
+
     return this.http.get<PackingList[]>(
       'http://localhost:5296/api/PackingList'
     );
