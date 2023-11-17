@@ -4,12 +4,12 @@ import { MatTableModule } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { PackingList } from '../../models/packinglist.model';
-import { loadPackingLists } from '../../store/packinglist.actions';
+import { loadPackingLists } from '../../store/packinglist/packinglist.actions';
 import {
   getPackingLists,
   getPackingListsError,
   getPackingListsLoading,
-} from '../../store/packinglist.selectors';
+} from '../../store/packinglist/packinglist.selectors';
 
 @Component({
   selector: 'app-packing-list-table',

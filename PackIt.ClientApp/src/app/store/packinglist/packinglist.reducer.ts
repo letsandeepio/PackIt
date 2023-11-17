@@ -4,7 +4,7 @@ import {
   loadPackingListsFailure,
   loadPackingListsSuccess,
 } from './packinglist.actions';
-import { PackingList } from '../models/packinglist.model';
+import { PackingList } from '../../models/packinglist.model';
 
 export interface PackingListState {
   packinglists: PackingList[];

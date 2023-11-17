@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
-import { PackingListService } from '../services/event.service';
+import { PackingListService } from '../../services/event.service';
 import {
   loadPackingLists,
   loadPackingListsFailure,
