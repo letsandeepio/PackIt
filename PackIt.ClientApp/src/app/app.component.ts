@@ -12,6 +12,8 @@ import { selectAllTabs } from './store/tab/tab.selectors';
 import { addTab } from './store/tab/tab.actions';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { AddPackingListDialogComponent } from './components/add-packing-list-dialog/add-packing-list-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class AppComponent implements OnInit {
   tabs$: Observable<Tab[]>;
 
-  constructor(private store: Store<TabState>) {
+  constructor(private store: Store<TabState>, public dialog: MatDialog) {
     this.tabs$ = this.store.select(selectAllTabs);
   }
 
@@ -44,5 +46,20 @@ export class AppComponent implements OnInit {
         tab: { id: 'test', link: 'packinglist/test', title: 'Test Tab' },
       })
     );
+  }
+
+  addPackingList() {
+    this.openDialog();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddPackingListDialogComponent, {
+      data: { name: '', description: '' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
   }
 }
